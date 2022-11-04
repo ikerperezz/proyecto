@@ -15,7 +15,7 @@ public class BaseDatos {
 		}
 		
 		try {
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:baseDatosProyecto.db");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:lib/baseDatosProyecto.db");
 			
 			
 			
