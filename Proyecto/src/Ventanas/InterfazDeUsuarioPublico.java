@@ -14,6 +14,8 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class InterfazDeUsuarioPublico extends JFrame {
 
@@ -48,24 +50,60 @@ public class InterfazDeUsuarioPublico extends JFrame {
 		contentPane.add(botonInicio);
 		
 		JButton botonClasificacion = new JButton("CLASIFICACION");
+		botonClasificacion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				VentanaClasificacion clasifi= new VentanaClasificacion();
+				clasifi.setVisible(true);
+				InterfazDeUsuarioPublico.this.setVisible(false);
+				
+			}
+		});
 		botonClasificacion.setBackground(new Color(255, 175, 175));
 		botonClasificacion.setFont(new Font("Tahoma", Font.BOLD, 11));
 		botonClasificacion.setBounds(99, 301, 125, 63);
 		contentPane.add(botonClasificacion);
 		
 		JButton botonEquipo = new JButton("EQUIPO");
+		botonEquipo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				VentanaEquipo equipo= new VentanaEquipo();
+				equipo.setVisible(true);
+				InterfazDeUsuarioPublico.this.setVisible(false);
+				
+			}
+		});
 		botonEquipo.setBackground(Color.YELLOW);
 		botonEquipo.setFont(new Font("Tahoma", Font.BOLD, 16));
 		botonEquipo.setBounds(234, 301, 107, 63);
 		contentPane.add(botonEquipo);
 		
 		JButton botonMercado = new JButton("MERCADO");
+		botonMercado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				VentanaMercado mercado= new VentanaMercado();
+				mercado.setVisible(true);
+				InterfazDeUsuarioPublico.this.setVisible(false);
+			
+			}
+		});
 		botonMercado.setBackground(Color.GREEN);
 		botonMercado.setFont(new Font("Tahoma", Font.BOLD, 15));
 		botonMercado.setBounds(348, 301, 122, 63);
 		contentPane.add(botonMercado);
 		
 		JButton botonAjustes = new JButton("AJUSTES");
+		botonAjustes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				VentanaAjustes ajustes= new VentanaAjustes();
+				ajustes.setVisible(true);
+				InterfazDeUsuarioPublico.this.setVisible(false);
+				
+			}
+		});
 		botonAjustes.setBackground(Color.RED);
 		botonAjustes.setFont(new Font("Tahoma", Font.BOLD, 15));
 		botonAjustes.setBounds(370, 0, 107, 63);
