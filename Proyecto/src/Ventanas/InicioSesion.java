@@ -10,6 +10,8 @@ import Clases.UsuarioPublico;
 import interfazes.ICrearLista;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
@@ -24,6 +26,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class InicioSesion extends JFrame implements ICrearLista {
 
@@ -72,14 +75,27 @@ public class InicioSesion extends JFrame implements ICrearLista {
 		
 		JButton btnIniciarSesion = new JButton("Iniciar Sesión");
 		btnIniciarSesion.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
+				
 				InterfazDeUsuarioPublico v = new InterfazDeUsuarioPublico(null, null);
 				v.setVisible(true);
 				InicioSesion.this.setVisible(false);
+				
+			if	(textField.getText().trim().isEmpty() || String.valueOf(passwordField.getPassword()).trim().isEmpty()) {
+				
+				JOptionPane.showMessageDialog(InicioSesion.this, "Hay campos obligatorios vacios, rellene todos");
+								
+			}	
+			
+			textField.setText("");
+			passwordField.setText("");
+				
+				
 			}
 		});
 		btnIniciarSesion.setFont(new Font("Verdana", Font.PLAIN, 17));
-		btnIniciarSesion.setBounds(76, 207, 194, 32);
+		btnIniciarSesion.setBounds(196, 207, 194, 32);
 		contentPane.add(btnIniciarSesion);
 		
 		passwordField = new JPasswordField();
@@ -103,6 +119,31 @@ public class InicioSesion extends JFrame implements ICrearLista {
 		btnCrearCuenta.setFont(new Font("Verdana", Font.PLAIN, 11));
 		btnCrearCuenta.setBounds(269, 21, 121, 23);
 		contentPane.add(btnCrearCuenta);
+		
+		JButton btnBorrar = new JButton("Borrar");
+		btnBorrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				textField.setText("");
+				passwordField.setText("");
+				
+			}
+		});
+		btnBorrar.setFont(new Font("Verdana", Font.PLAIN, 17));
+		btnBorrar.setBounds(25, 207, 115, 32);
+		contentPane.add(btnBorrar);
+		
+		JLabel lblNewLabel = new JLabel("*Este campo es obligatorio");
+		lblNewLabel.setForeground(Color.RED);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblNewLabel.setBounds(190, 109, 142, 14);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("*Este campo es obligatorio");
+		lblNewLabel_1.setForeground(Color.RED);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblNewLabel_1.setBounds(190, 167, 142, 14);
+		contentPane.add(lblNewLabel_1);
 	}
 	
 	public void crearLista() {
