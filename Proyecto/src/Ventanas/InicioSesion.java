@@ -73,7 +73,7 @@ public class InicioSesion extends JFrame implements ICrearLista {
 		JButton btnIniciarSesion = new JButton("Iniciar Sesión");
 		btnIniciarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InterfazDeUsuarioPublico v = new InterfazDeUsuarioPublico();
+				InterfazDeUsuarioPublico v = new InterfazDeUsuarioPublico(null, null);
 				v.setVisible(true);
 				InicioSesion.this.setVisible(false);
 			}
