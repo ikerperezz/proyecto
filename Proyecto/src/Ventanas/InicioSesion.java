@@ -5,6 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Clases.UsuarioPublico;
+import interfazes.ICrearLista;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -13,14 +17,20 @@ import javax.swing.JTextField;
 import javax.swing.BoxLayout;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
-public class InicioSesion extends JFrame {
+public class InicioSesion extends JFrame implements ICrearLista {
 
 	private JPanel contentPane;
 	private JPasswordField passwordField;
 	private JTextField textField;
-
+	private ArrayList<UsuarioPublico> up = new ArrayList<UsuarioPublico>();
 	/**
 	 * Launch the application.
 	 */
@@ -41,6 +51,7 @@ public class InicioSesion extends JFrame {
 	 * Create the frame.
 	 */
 	public InicioSesion() {
+		crearLista();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -93,4 +104,36 @@ public class InicioSesion extends JFrame {
 		btnCrearCuenta.setBounds(269, 21, 121, 23);
 		contentPane.add(btnCrearCuenta);
 	}
+	
+	public void crearLista() {
+		try {
+			Class.forName("org.sqlite.JDBC");
+		} catch (ClassNotFoundException e) {
+			System.out.println("No se ha podido cargar el driver de la base de datos");
+		}
+		
+		try {
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:baseDatosProyecto.db");
+			
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT nombreDeUsuario, contraseña, dineroDisponible, idLiga FROM usuarios");
+
+			while (rs.next()) {
+				String usuario = rs.getString("nombreDeUsuario");
+				String contraseina = rs.getString("contraseña");
+				String idLIga = rs.getString("IdLIga");
+				int dineroDisponible =rs.getInt("dineroDisponible");
+				UsuarioPublico us= new UsuarioPublico(usuario, contraseina, idLIga, dineroDisponible);
+				up.add(us);
+			}
+			rs.close();
+			stmt.close();
+			
+			conn.close();
+		} catch (SQLException e) {
+			System.out.println("No se ha podido establecer la conexión a la base de datos");
+		}
+	}
+	
+	
 }
