@@ -20,11 +20,23 @@ public class BaseDatos {
 		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:baseDatosProyecto.db");
 			
-	
+			Statement stmt = conn.createStatement();
 			
+			ResultSet rs = stmt.executeQuery("SELECT idUsuario, contraseña from usuario");
+			
+			while(rs.next()) {
+				
+				String idUsuario = rs.getString("idUsuario");
+				String contraseña = rs.getString("contraseña");
+				System.out.println(idUsuario);
+				System.out.println(contraseña);
+			}
+			rs.close();
+			stmt.close();
 			conn.close();
 		} catch (SQLException e) {
 			System.out.println("No se ha podido establecer la conexión a la base de datos");
+			System.out.println(e.getMessage());
 		}
 
 	}
