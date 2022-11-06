@@ -25,6 +25,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
@@ -76,11 +77,11 @@ public class InicioSesion extends JFrame implements ICrearLista {
 		JButton btnIniciarSesion = new JButton("Iniciar Sesión");
 		btnIniciarSesion.addActionListener(new ActionListener() {
 			
+			
 			public void actionPerformed(ActionEvent e) {
 				
 				InterfazDeUsuarioPublico v = new InterfazDeUsuarioPublico(null, null);
-				v.setVisible(true);
-				InicioSesion.this.setVisible(false);
+				
 				
 			if	(textField.getText().trim().isEmpty() || String.valueOf(passwordField.getPassword()).trim().isEmpty()) {
 				
@@ -88,10 +89,45 @@ public class InicioSesion extends JFrame implements ICrearLista {
 								
 			}	
 			
+			crearLista();
+			
+			boolean acceso=false;
+			
+			for (int i = 0; i < up.size(); i++) {
+				
+		if (textField.equals(up.get(i).getUsuario()) && (passwordField.getPassword().equals(up.get(i).getContraseina()) ) ) {
+				
+			
+			acceso=true;
+			break;	
+				
+			}
+			
+			
+		if (! textField.equals(up.get(i).getUsuario()) || (! passwordField.getPassword().equals(up.get(i).getContraseina()) ) ) {
+				
+				
+			acceso=false;
+			}
+		
+			}
+			
+		if (acceso=true) {
+			
+			v.setVisible(true);
+			InicioSesion.this.setVisible(false);
 			textField.setText("");
 			passwordField.setText("");
-				
-				
+			
+		} else {
+			
+			JOptionPane.showMessageDialog(InicioSesion.this, "Usuario o contrasena incorrecto, intentelo de nuevo");
+			
+			textField.setText("");
+			passwordField.setText("");
+			
+		}
+		
 			}
 		});
 		btnIniciarSesion.setFont(new Font("Verdana", Font.PLAIN, 17));
