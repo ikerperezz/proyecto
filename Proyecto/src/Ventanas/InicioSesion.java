@@ -55,7 +55,7 @@ public class InicioSesion extends JFrame implements ICrearLista {
 	 * Create the frame.
 	 */
 	public InicioSesion() {
-		crearLista();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -79,54 +79,44 @@ public class InicioSesion extends JFrame implements ICrearLista {
 			
 			
 			public void actionPerformed(ActionEvent e) {
-				
-				InterfazDeUsuarioPublico v = new InterfazDeUsuarioPublico(null, null);
-				
-				
-			if	(textField.getText().trim().isEmpty() || String.valueOf(passwordField.getPassword()).trim().isEmpty()) {
-				
-				JOptionPane.showMessageDialog(InicioSesion.this, "Hay campos obligatorios vacios, rellene todos");
-								
-			}	
+
+				crearLista();
+				UsuarioPublico us = new UsuarioPublico("iperez", "123i", "A1", 100000000);
+				up.add(us);
+
+				boolean acceso = false;
+
+				for (int i = 0; i < up.size(); i++) {
+					if (textField.getText().trim().isEmpty()
+							|| String.valueOf(passwordField.getText()).trim().isEmpty()) {
+
+						JOptionPane.showMessageDialog(InicioSesion.this,
+								"Hay campos obligatorios vacios, rellene todos");
+						break;
+					}
+					if (textField.getText().equals(up.get(i).getUsuario())
+							&& (passwordField.getText().equals(up.get(i).getContraseina()))) {
+						InterfazDeUsuarioPublico v = new InterfazDeUsuarioPublico(null, null);
+						v.setVisible(true);
+						InicioSesion.this.setVisible(false);
+						textField.setText("");
+						passwordField.setText("");
+						acceso = true;
+						break;
+
+					}
+
+				}
+
+				if (acceso == false) {
+					JOptionPane.showMessageDialog(InicioSesion.this,
+							"Usuario o contrasena incorrecto, intentelo de nuevo");
+
+					textField.setText("");
+					passwordField.setText("");
 			
-			crearLista();
 			
-			boolean acceso=false;
-			
-			for (int i = 0; i < up.size(); i++) {
-				
-		if (textField.equals(up.get(i).getUsuario()) && (passwordField.getPassword().equals(up.get(i).getContraseina()) ) ) {
-				
-			
-			acceso=true;
-			break;	
-				
-			}
-			
-			
-		if (! textField.equals(up.get(i).getUsuario()) || (! passwordField.getPassword().equals(up.get(i).getContraseina()) ) ) {
-				
-				
-			acceso=false;
-			}
-		
-			}
-			
-		if (acceso=true) {
-			
-			v.setVisible(true);
-			InicioSesion.this.setVisible(false);
-			textField.setText("");
-			passwordField.setText("");
-			
-		} else {
-			
-			JOptionPane.showMessageDialog(InicioSesion.this, "Usuario o contrasena incorrecto, intentelo de nuevo");
-			
-			textField.setText("");
-			passwordField.setText("");
-			
-		}
+		} 
 		
 			}
 		});
