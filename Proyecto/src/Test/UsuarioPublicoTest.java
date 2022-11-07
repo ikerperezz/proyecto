@@ -7,7 +7,7 @@ import org.junit.Test;
 import Clases.Usuario;
 import Clases.UsuarioPublico;
 
-public class TestUsuarioPublico {
+public class UsuarioPublicoTest {
 
 	@Test
 	public void testGetIdLiga() {
