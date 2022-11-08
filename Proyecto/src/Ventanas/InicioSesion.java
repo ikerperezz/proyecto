@@ -74,6 +74,20 @@ public class InicioSesion extends JFrame implements ICrearLista {
 		lblContraseina.setBounds(48, 144, 132, 14);
 		contentPane.add(lblContraseina);
 		
+		JLabel lblCampoObligatorio = new JLabel("*Este campo es obligatorio");
+		lblCampoObligatorio.setForeground(Color.RED);
+		lblCampoObligatorio.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblCampoObligatorio.setBounds(190, 109, 142, 14);
+		lblCampoObligatorio.setVisible(false);
+		contentPane.add(lblCampoObligatorio);
+		
+		JLabel lblCampoObligatorio1 = new JLabel("*Este campo es obligatorio");
+		lblCampoObligatorio1.setForeground(Color.RED);
+		lblCampoObligatorio1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblCampoObligatorio1.setBounds(190, 167, 142, 14);
+		lblCampoObligatorio1.setVisible(false);
+		contentPane.add(lblCampoObligatorio1);
+		
 		JButton btnIniciarSesion = new JButton("Iniciar Sesión");
 		btnIniciarSesion.addActionListener(new ActionListener() {
 			
@@ -85,6 +99,7 @@ public class InicioSesion extends JFrame implements ICrearLista {
 				up.add(us);
 
 				boolean acceso = false;
+				boolean camposVacios = false;
 
 				for (int i = 0; i < up.size(); i++) {
 					if (textField.getText().trim().isEmpty()
@@ -92,6 +107,9 @@ public class InicioSesion extends JFrame implements ICrearLista {
 
 						JOptionPane.showMessageDialog(InicioSesion.this,
 								"Hay campos obligatorios vacios, rellene todos");
+						lblCampoObligatorio.setVisible(true);
+						lblCampoObligatorio1.setVisible(true);
+						camposVacios=true;
 						break;
 					}
 					if (textField.getText().equals(up.get(i).getUsuario())
@@ -108,7 +126,7 @@ public class InicioSesion extends JFrame implements ICrearLista {
 
 				}
 
-				if (acceso == false) {
+				if (acceso == false && camposVacios==false) {
 					JOptionPane.showMessageDialog(InicioSesion.this,
 							"Usuario o contrasena incorrecto, intentelo de nuevo");
 
@@ -159,17 +177,7 @@ public class InicioSesion extends JFrame implements ICrearLista {
 		btnBorrar.setBounds(25, 207, 115, 32);
 		contentPane.add(btnBorrar);
 		
-		JLabel lblNewLabel = new JLabel("*Este campo es obligatorio");
-		lblNewLabel.setForeground(Color.RED);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblNewLabel.setBounds(190, 109, 142, 14);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("*Este campo es obligatorio");
-		lblNewLabel_1.setForeground(Color.RED);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblNewLabel_1.setBounds(190, 167, 142, 14);
-		contentPane.add(lblNewLabel_1);
+	
 	}
 	
 	public void crearLista() {
